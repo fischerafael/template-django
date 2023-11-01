@@ -1,6 +1,6 @@
 from datetime import timedelta
-from django.contrib.auth import get_user_model
 
+from django.contrib.auth import get_user_model
 from django.core.validators import (MaxValueValidator, MinLengthValidator,
                                     MinValueValidator)
 from django.db import models
