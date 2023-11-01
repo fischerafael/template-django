@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.contrib.auth import get_user_model
 
 from django.core.validators import (MaxValueValidator, MinLengthValidator,
                                     MinValueValidator)
@@ -41,6 +42,7 @@ class Brag(models.Model):
     extra_link = models.URLField(blank=True, null=True)
     is_public = models.BooleanField(default=False)
     status = models.CharField(max_length=30, choices=STATUS)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     @property
     def tags(self):

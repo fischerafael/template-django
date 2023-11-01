@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from brags import models
+
+class BragAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+admin.site.register(models.Brag, BragAdmin)
