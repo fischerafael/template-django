@@ -5,6 +5,7 @@ from brags import models
 class TagsInline(admin.TabularInline):
     model = models.BragTag
     extra = 1
+    
 
 class BragAdmin(admin.ModelAdmin):
     list_display = ('title',)
