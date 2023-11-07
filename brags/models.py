@@ -78,6 +78,7 @@ class Subscription(models.Model):
     def __str__(self):
         return f"{self.title} ($ {self.price})"
 
+
 class CompanySubscription():
     company = models.ForeignKey('Company', on_delete=models.CASCADE)
     subscription = models.ForeignKey('Subscription', on_delete=models.CASCADE)
