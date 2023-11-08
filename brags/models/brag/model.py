@@ -34,3 +34,9 @@ class Brag(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+    @classmethod
+    def list_brags_by_user(cls, user):
+        return cls.objects.filter(
+            user = user
+        )
