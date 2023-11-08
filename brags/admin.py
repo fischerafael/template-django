@@ -1,9 +1,13 @@
 from django.contrib import admin
 
-from brags import models
+from brags.models.brag.model import Brag
+from brags.models.brag_tag.model import BragTag
+from brags.models.category.model import Category
+from brags.models.tag.model import Tag
+
 
 class TagsInline(admin.TabularInline):
-    model = models.BragTag
+    model = BragTag
     extra = 1
     
 
@@ -20,6 +24,6 @@ class TagAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
-admin.site.register(models.Brag, BragAdmin)
-admin.site.register(models.Tag, TagAdmin)
-admin.site.register(models.Category, CategoryAdmin)
+admin.site.register(Brag, BragAdmin)
+admin.site.register(Tag, TagAdmin)
+admin.site.register(Category, CategoryAdmin)
