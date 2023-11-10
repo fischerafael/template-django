@@ -5,6 +5,8 @@ from django.core.validators import (MaxValueValidator, MinLengthValidator,
                                     MinValueValidator)
 from django.db import models
 
+from users.models import CustomUser
+
 STATUS = [
     ("PENDING", "Pending"),
     ("IN-PROGRESS", "In Progress"),
@@ -39,4 +41,13 @@ class Brag(models.Model):
     def list_brags_by_user(cls, user):
         return cls.objects.filter(
             user = user
+        )
+    
+    @classmethod
+    def create(cls, title: str, user: CustomUser, duration: float = 0.15):
+        cls.objects.create(
+            title=title,
+            user=user,
+            duration=duration,
+            status='PENDING'
         )
