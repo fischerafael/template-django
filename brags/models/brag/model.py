@@ -19,11 +19,8 @@ class Brag(models.Model):
     title = models.CharField(max_length=30,  validators=[
                               MinLengthValidator(3)])
     created_at = models.DateField(auto_now=True)
-    duration = models.DurationField(default=DEFAULT_DURATION, validators=[
-        MinValueValidator(timedelta(hours=0)),
-        MaxValueValidator(timedelta(hours=24))  
-    ])
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    duration = models.DecimalField(max_digits=3, decimal_places=2)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True, null=True)
     extra_link = models.URLField(blank=True, null=True)
     is_public = models.BooleanField(default=False)
