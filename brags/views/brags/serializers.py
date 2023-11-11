@@ -18,4 +18,7 @@ class ListBragsSerializer(serializers.ModelSerializer):
         return titles
     
     def get_category(self, obj):
-        return obj.category.title
+        try:
+            return obj.category.title
+        except:
+            return ''
