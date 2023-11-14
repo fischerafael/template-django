@@ -3,7 +3,9 @@ from datetime import timedelta
 from django.contrib.auth import get_user_model
 from django.core.validators import (MinLengthValidator)
 from django.db import models
+from brags.models.brag_tag.model import BragTag
 from brags.models.category.model import Category
+from brags.models.tag.model import Tag
 
 from users.models import CustomUser
 
@@ -46,6 +48,7 @@ class Brag(models.Model):
         return cls.objects.get(id=id)
     
     @classmethod
-    def add_tag(cls, brag_id: int, tag):       
-        brag = cls.find_by_id(brag_id)
-        print('**** brag id', brag)
+    def add_tag(cls, brag_id: int, tag: Tag):  
+        brag = cls.find_by_id(brag_id)   
+        return BragTag.objects.create(brag=brag, tag=tag)
+        

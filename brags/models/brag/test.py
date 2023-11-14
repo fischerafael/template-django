@@ -1,3 +1,5 @@
+# python manage.py test brags.models.brag.test
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from brags.models.brag.model import Brag
@@ -50,5 +52,16 @@ class BragModelTest(TestCase):
         )
         brag = Brag.find_by_id(created_brag.id)        
         self.assertEqual(brag, created_brag)
+
+    def test_add_tag_to_brag(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )           
+        tag = Tag.create(title='Test tag')
+        brag.add_tag(brag_id=brag.id, tag=tag)
+        self.assertEqual(len(brag.tags), 1)
 
    
