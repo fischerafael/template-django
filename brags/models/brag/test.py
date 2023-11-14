@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from brags.models.brag.model import Brag
 
 from brags.models.category.model import Category
+from brags.models.tag.model import Tag
 
 class BragModelTest(TestCase):
     def setUp(self):
@@ -39,3 +40,15 @@ class BragModelTest(TestCase):
             duration=0.5
         )
         self.assertEqual(brag.duration, 0.5)
+
+    def test_find_brag_by_id(self):
+        created_brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        brag = Brag.find_by_id(created_brag.id)        
+        self.assertEqual(brag, created_brag)
+
+   

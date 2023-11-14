@@ -40,3 +40,12 @@ class Brag(models.Model):
             is_public=False,
             category=category
         )
+    
+    @classmethod
+    def find_by_id(cls, id: int):
+        return cls.objects.get(id=id)
+    
+    @classmethod
+    def add_tag(cls, brag_id: int, tag):       
+        brag = cls.find_by_id(brag_id)
+        print('**** brag id', brag)

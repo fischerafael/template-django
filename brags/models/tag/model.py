@@ -1,6 +1,4 @@
-from django.contrib.auth import get_user_model
-from django.core.validators import (MaxValueValidator, MinLengthValidator,
-                                    MinValueValidator)
+from django.core.validators import (MinLengthValidator)
 from django.db import models
 
 
@@ -10,3 +8,9 @@ class Tag(models.Model):
     
     def __str__(self) -> str:
         return self.title
+    
+    @classmethod
+    def create(cls, title: str):
+        if len(title) < 3:
+            raise ValueError
+        return cls.objects.create(title=title)
