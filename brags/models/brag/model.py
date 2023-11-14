@@ -1,30 +1,21 @@
 from datetime import timedelta
 
 from django.contrib.auth import get_user_model
-from django.core.validators import (MaxValueValidator, MinLengthValidator,
-                                    MinValueValidator)
+from django.core.validators import (MinLengthValidator)
 from django.db import models
+from brags.models.category.model import Category
 
 from users.models import CustomUser
 
-STATUS = [
-    ("PENDING", "Pending"),
-    ("IN-PROGRESS", "In Progress"),
-    ("COMPLETED", "Completed"),
-]
-
 class Brag(models.Model):
     DEFAULT_DURATION = timedelta(hours=0.15)
-
     title = models.CharField(max_length=30,  validators=[
                               MinLengthValidator(3)])
-    created_at = models.DateField(auto_now=True)
     duration = models.DecimalField(max_digits=3, decimal_places=2)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True)
-    extra_link = models.URLField(blank=True, null=True)
-    is_public = models.BooleanField(default=False)
-    status = models.CharField(max_length=30, choices=STATUS)
+    is_public = models.BooleanField(default=False)    
+    created_at = models.DateField(auto_now=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     @property
@@ -41,10 +32,11 @@ class Brag(models.Model):
         )
     
     @classmethod
-    def create(cls, title: str, user: CustomUser, duration: float = 0.15):
-        cls.objects.create(
+    def create(cls, title: str, user: CustomUser, category: Category, duration: float = 0.15):       
+        return cls.objects.create(
             title=title,
             user=user,
             duration=duration,
-            status='PENDING'
+            is_public=False,
+            category=category
         )

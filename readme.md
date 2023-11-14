@@ -19,7 +19,7 @@ django-admin startproject config
 #
 
 - Modificações
-  -- Remover status
+  -- Remover status X
   -- Alterar description e extra link para que sejam descopladas
 
 - SignUp
