@@ -47,8 +47,10 @@ class Brag(models.Model):
     def find_by_id(cls, id: int):
         return cls.objects.get(id=id)
     
-    @classmethod
-    def add_tag(cls, brag_id: int, tag: Tag):  
-        brag = cls.find_by_id(brag_id)   
-        return BragTag.objects.create(brag=brag, tag=tag)
+    def add_tag(self, tag: Tag):     
+        return BragTag.objects.create(brag=self, tag=tag)
+    
+    def update_title(self, new_title: str):
+        self.title = new_title
+        self.save()
         

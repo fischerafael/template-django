@@ -56,6 +56,17 @@ class BragModelTest(TestCase):
         brag = Brag.find_by_id(created_brag.id)        
         self.assertEqual(brag, created_brag)
 
+    def test_update_brag_title(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(brag.title, 'Test Brag')
+        brag.update_title('new title')
+        self.assertEqual(brag.title, 'new title')
+
     def test_add_tag_to_brag(self):
         brag = Brag.create(
             title='Test Brag',
@@ -64,7 +75,7 @@ class BragModelTest(TestCase):
             duration=0.5
         )           
         tag = Tag.create(title='Test tag')
-        brag.add_tag(brag_id=brag.id, tag=tag)
+        brag.add_tag(tag=tag)
         self.assertEqual(len(brag.tags), 1)
 
    
