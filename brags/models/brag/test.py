@@ -172,3 +172,29 @@ class BragModelTest(TestCase):
         self.assertEqual(brag.is_public, True)
         brag.make_private()
         self.assertEqual(brag.is_public, False)
+
+    def test_add_tag(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(len(brag.tags), 0)
+        tag = Tag.create('test')
+        brag.add_tag(tag)
+        self.assertEqual(len(brag.tags), 1)
+
+    def test_delete_tag(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(len(brag.tags), 0)
+        tag = Tag.create('test')
+        brag.add_tag(tag)
+        self.assertEqual(len(brag.tags), 1)
+        brag.remove_tag(tag)
+        self.assertEqual(len(brag.tags), 0)

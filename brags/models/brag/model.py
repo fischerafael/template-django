@@ -79,4 +79,11 @@ class Brag(models.Model):
     def make_private(self):
         self.is_public = False
         self.save()
+    
+    def add_tag(self, tag: Tag):
+        self.bragtag_set.create(tag=tag, brag=self)
+
+    def remove_tag(self, tag: Tag):
+        tag = self.bragtag_set.get(tag=tag, brag=self)
+        tag.delete()
         
