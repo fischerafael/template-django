@@ -32,8 +32,8 @@ django-admin startproject config
   -- Título, duração, categoria
 
 - Atualizar título da brag x
-- Atualizar duração da brag
-- Atualizar categoria da brag
+- Atualizar duração da brag x
+- Atualizar categoria da brag x
 
 - Remover Brag
 

@@ -111,4 +111,39 @@ class BragModelTest(TestCase):
         brag.add_tag(tag=tag)
         self.assertEqual(len(brag.tags), 1)
 
-   
+    def test_category(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(brag.category, self.category)
+        new_category = Category.objects.create(title='new cat')
+        brag.update_category(new_category)
+        self.assertEqual(brag.category, new_category)
+
+    def test_not_update_duration_if_not_provided(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(brag.category, self.category)
+        brag.update_duration()
+        self.assertEqual(brag.category, self.category)
+
+    def test_edit_description(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        brag.edit_description('some description')
+        self.assertEqual(brag.description, 'some description')
+        brag.edit_description('')
+        self.assertEqual(brag.description, '')
+        brag.edit_description()
+        self.assertEqual(brag.description, '')

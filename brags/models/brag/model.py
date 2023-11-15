@@ -62,4 +62,14 @@ class Brag(models.Model):
             return
         self.duration = duration
         self.save()
+
+    def update_category(self, category: Optional[str] = None):
+        if not category:
+            return
+        self.category = category
+        self.save()
+
+    def edit_description(self, description: Optional[str] = ''):
+        self.description = description
+        self.save()
         
