@@ -198,3 +198,18 @@ class BragModelTest(TestCase):
         self.assertEqual(len(brag.tags), 1)
         brag.remove_tag(tag)
         self.assertEqual(len(brag.tags), 0)
+
+    def test_delete_non_existing_tag(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(len(brag.tags), 0)
+        tag = Tag.create('test')
+        brag.add_tag(tag)
+        self.assertEqual(len(brag.tags), 1)
+        other_tag = Tag.create('another')
+        brag.remove_tag(other_tag)
+        self.assertEqual(len(brag.tags), 1)
