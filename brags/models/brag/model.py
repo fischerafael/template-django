@@ -11,7 +11,6 @@ from brags.models.tag.model import Tag
 from users.models import CustomUser
 
 class Brag(models.Model):
-    DEFAULT_DURATION = timedelta(hours=0.15)
     title = models.CharField(max_length=30,  validators=[
                               MinLengthValidator(3)])
     duration = models.DecimalField(max_digits=3, decimal_places=2)
@@ -71,5 +70,13 @@ class Brag(models.Model):
 
     def edit_description(self, description: Optional[str] = ''):
         self.description = description
+        self.save()
+
+    def make_public(self):
+        self.is_public = True
+        self.save()
+
+    def make_private(self):
+        self.is_public = False
         self.save()
         

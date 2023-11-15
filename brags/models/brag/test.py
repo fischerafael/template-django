@@ -1,11 +1,12 @@
 # python manage.py test brags.models.brag.test
 
-from django.test import TestCase
 from django.contrib.auth import get_user_model
-from brags.models.brag.model import Brag
+from django.test import TestCase
 
+from brags.models.brag.model import Brag
 from brags.models.category.model import Category
 from brags.models.tag.model import Tag
+
 
 class BragModelTest(TestCase):
     def setUp(self):
@@ -147,3 +148,27 @@ class BragModelTest(TestCase):
         self.assertEqual(brag.description, '')
         brag.edit_description()
         self.assertEqual(brag.description, '')
+
+    def test_make_public(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(brag.is_public, False)
+        brag.make_public()
+        self.assertEqual(brag.is_public, True)
+
+    def test_make_private(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(brag.is_public, False)
+        brag.make_public()
+        self.assertEqual(brag.is_public, True)
+        brag.make_private()
+        self.assertEqual(brag.is_public, False)
