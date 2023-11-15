@@ -1,4 +1,5 @@
 from datetime import timedelta
+from typing import Optional
 
 from django.contrib.auth import get_user_model
 from django.core.validators import (MinLengthValidator)
@@ -50,7 +51,15 @@ class Brag(models.Model):
     def add_tag(self, tag: Tag):     
         return BragTag.objects.create(brag=self, tag=tag)
     
-    def update_title(self, new_title: str):
+    def update_title(self, new_title: Optional[str] = None):
+        if not new_title:
+            return
         self.title = new_title
+        self.save()
+
+    def update_duration(self, duration: Optional[str] = None):
+        if not duration:
+            return
+        self.duration = duration
         self.save()
         

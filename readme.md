@@ -31,7 +31,7 @@ django-admin startproject config
 - Criar Brag
   -- Título, duração, categoria
 
-- Atualizar título da brag
+- Atualizar título da brag x
 - Atualizar duração da brag
 - Atualizar categoria da brag
 
