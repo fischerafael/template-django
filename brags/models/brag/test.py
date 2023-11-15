@@ -34,14 +34,17 @@ class BragModelTest(TestCase):
         )
         self.assertEqual(str(brag), 'Test Brag')
 
-    def test_create_brag_with_custom_duration(self):
+    def test_create_brag(self):
         brag = Brag.create(
             title='Test Brag',
             user=self.user,
             category=self.category,
-            duration=0.5
+            duration=0.15
         )
-        self.assertEqual(brag.duration, 0.5)
+        self.assertEqual(brag.title, 'Test Brag')
+        self.assertEqual(brag.user, self.user)
+        self.assertEqual(brag.category, self.category)
+        self.assertEqual(brag.duration,  0.15)
 
     def test_find_brag_by_id(self):
         created_brag = Brag.create(
