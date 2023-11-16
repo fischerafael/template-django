@@ -1,5 +1,5 @@
-# python manage.py test brags.models.brag.test
-
+# python manage.py test brags.models.brag.test_model
+from datetime import datetime, timedelta, date
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
