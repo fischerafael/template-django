@@ -213,3 +213,16 @@ class BragModelTest(TestCase):
         other_tag = Tag.create('another')
         brag.remove_tag(other_tag)
         self.assertEqual(len(brag.tags), 1)
+
+    def test_remove_brag(self):
+        brag = Brag.create(
+            title='Test Brag',
+            user=self.user,
+            category=self.category,
+            duration=0.5
+        )
+        self.assertEqual(brag.title, 'Test Brag')
+        brag.remove()
+        brag = Brag.find_by_id(brag.id)
+        self.assertEqual(brag, None)
+

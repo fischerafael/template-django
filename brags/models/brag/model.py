@@ -45,7 +45,13 @@ class Brag(models.Model):
     
     @classmethod
     def find_by_id(cls, id: int):
-        return cls.objects.get(id=id)
+        try:
+            return cls.objects.get(id=id)
+        except:
+            return None
+    
+    def remove(self):
+        self.delete()
     
     def add_tag(self, tag: Tag):     
         return BragTag.objects.create(brag=self, tag=tag)
