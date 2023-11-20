@@ -52,10 +52,6 @@ class Brag(models.Model):
     
     def remove(self):
         self.delete()
-
-    def _set_created_at(self, created_at: date):
-        self.created_at = created_at
-        self.save()
     
     def add_tag(self, tag: Tag):     
         return BragTag.objects.create(brag=self, tag=tag)
