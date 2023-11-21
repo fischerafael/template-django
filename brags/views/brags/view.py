@@ -1,8 +1,11 @@
+from datetime import date
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from brags.use_cases import brag_list, bag_create
+from brags.use_cases import bag_create, brag_list
 from brags.views.brags.serializers import ListBragsSerializer
+
 
 @api_view(['GET', 'POST'])
 def view_brags(request):
@@ -13,6 +16,7 @@ def view_brags(request):
     
     service = brag_list.ListBrags()
     output = service.execute(
-        user_id=1
+        user_id=1,
+        day='2023-11-11'
     )
     return Response(ListBragsSerializer(output, many=True).data)

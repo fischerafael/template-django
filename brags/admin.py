@@ -12,7 +12,7 @@ class TagsInline(admin.TabularInline):
     
 
 class BragAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'created_at',)
     inlines = [TagsInline]
 
     def save_related(self, request, form, formsets, change):
