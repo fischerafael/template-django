@@ -23,8 +23,8 @@ def view_brags(request):
                 user_id=serializer.validated_data['user_id']
             )
             return Response("Ok")
-        except:
-            return Response('Error', status=400)
+        except Exception as e:
+            return Response({'error': f'{e}'}, status=400)
     
     today = date.today()
     service = brag_list.ListBrags()

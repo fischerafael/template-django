@@ -13,7 +13,11 @@ class CreateBrag():
         user = CustomUser.find_user_by_id(
             id=user_id
         )
+        if not user:
+            raise ValueError('User does not exist')
         category = Category.find_by_id(category_id)
+        if not category:
+            raise ValueError('Category does not exist')
         brag = Brag.create(
             duration=duration,
             title=title,
