@@ -11,3 +11,14 @@ class Category(models.Model):
     
     def __str__(self) -> str:
         return self.title
+
+    @classmethod
+    def list_all(cls):
+        return cls.objects.all()
+    
+    @classmethod
+    def find_by_id(cls, id: int):
+        try: 
+            return cls.objects.get(id=id)
+        except:
+            return None
