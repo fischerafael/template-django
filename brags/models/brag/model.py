@@ -42,6 +42,12 @@ class Brag(models.Model):
             is_public=False,
             category=category
         )
+
+    def remove(self):
+        try:
+            self.delete()
+        except:
+            return None
     
     @classmethod
     def find_by_id(cls, id: int):
