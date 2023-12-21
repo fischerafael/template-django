@@ -19,7 +19,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
-from brags.urls import brag_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,4 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-urlpatterns += brag_urlpatterns
+
